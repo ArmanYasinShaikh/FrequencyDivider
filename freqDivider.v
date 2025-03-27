@@ -13,15 +13,15 @@ Parameters:
 	
 Function:
 	- clogb2: Computes the minimum number of flip-flops required by doing log to the base 2 computation. Can use
-				 the inbuilt function $clogb2.
+		  the inbuilt function $clogb2.
 
 References:
-	-
+	- Digital Design by M. Morris Mano
 
 -----------------------------------------------------------------------------------------------------------------
 */
 
-module freqDivider #(parameter N = 8) (
+module freqDivider #(parameter N = 16) (
 	output clk_out, // Output clock with divided frequency
 	input clk_in, // Input clock
 	input rstn // Active-low reset
@@ -35,7 +35,7 @@ module freqDivider #(parameter N = 8) (
 	wire [0:M-1]qb;
 	wire [0:M-1]c;
 		
-	// Generate block to instantiate M D flip-flops
+	// Generate block to instantiate M D flip-flops with asynchronous active-low reset
 	generate 
 		for (j = 0; j < M; j = j + 1) begin : my_freq_divider
 			if (j==0)
